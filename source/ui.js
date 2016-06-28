@@ -32,7 +32,32 @@ if (typeof jQuery !== 'undefined') {
                 var self = this;
                 self.nes = nes;
 
+                // [Memory (0), Value (1) , Title (2), Description (3), Img (4), Triggered (5)]
+                self.achievementPopup = function(achievement){
+                  console.log("Popping achievement ");
+                  var $div = $("<div class='achievement'>" +
+                                  "<img src=achievements/"+achievement[4]+".png>"+
+                                  "<div class='details'>"+
+                                    "<p class='title'>" + achievement[2]+ "</p>"+
+                                    "<p class='description'>"+ achievement[3] +"</p>"+
+                                  "</div>"+
+                               "</div>");
+                  $div.appendTo(self.root);
 
+                  //appear div popup
+                  $div.animate({
+                        right: 20
+                  });
+
+                  //dissappear and remove div popup
+                  setTimeout(function(){
+                    $div.animate({
+                          right: -200
+                    }, function() {
+                      $div.remove(); // on animation finish, remove
+                    });
+                  }, 3000); //Hide after 3 seconds
+                };
                 /*
                  * Create UI
                  */
@@ -125,7 +150,7 @@ if (typeof jQuery !== 'undefined') {
                 });
 
                 self.screen.animate({
-                    width: '512px',
+                    width: '580px',
                     height: '480px'
                 });
                 self.buttons.zoom.attr("value", "zoom out");

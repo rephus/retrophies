@@ -1,7 +1,6 @@
-.tv {
+/*.tv {
   background-image: url("tv.png");
   background-repeat: no-repeat;
-  background-color: black;
 
   width:971px;
   height:656px;
@@ -13,4 +12,36 @@
   left:180px;
   top:80px;
 
+}
+*/
+.achievement {
+  width: 200px;
+  height:50px;
+  background-color:gray;
+  border:1px solid black;
+  border-radius: 10px;
+
+  position:fixed;
+  right:-200px;
+  top:20px;
+}
+.achievement img {
+  height: 40px;
+padding: 5px;
+}
+.achievement .details {
+  width: 75%;
+  line-height: 3px;
+  text-align: right;
+
+  position: absolute;
+  top: 0px;
+  right: 5px;
+}
+.achievement .title {
+  color:white
+}
+.achievement .description {
+  color:#ddd;
+      font-size: small;
 }
