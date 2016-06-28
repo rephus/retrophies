@@ -50,13 +50,13 @@ if (typeof jQuery !== 'undefined') {
                   });
 
                   //dissappear and remove div popup
-                  setTimeout(function(){
+                /*  setTimeout(function(){
                     $div.animate({
                           right: -200
                     }, function() {
                       $div.remove(); // on animation finish, remove
                     });
-                  }, 3000); //Hide after 3 seconds
+                  }, 3000); *///Hide after 3 seconds
                 };
                 /*
                  * Create UI
@@ -72,7 +72,7 @@ if (typeof jQuery !== 'undefined') {
                 self.nes.audio = {
                    ctx: new AudioContext()
                  };
-
+/*
                 self.romContainer = $('<div class="nes-roms"></div>').appendTo(self.root);
                 self.romSelect = $('<select></select>').appendTo(self.romContainer);
 
@@ -84,21 +84,23 @@ if (typeof jQuery !== 'undefined') {
                     zoom: $('<input type="button" value="zoom in" class="nes-zoom">').appendTo(self.controls)
                 };
                 self.status = $('<p class="nes-status">Booting up...</p>').appendTo(self.root);
-                self.root.appendTo(parent);
+*/
+              self.root.appendTo(parent);
 
                 /*
                  * ROM loading
-                 */
+
                 self.romSelect.change(function() {
                     console.log("Loading rom " , self.romSelect);
                     self.loadROM();
                 });
-
+ */
                 // Load mario game automatically on start
                 self.loadROM("roms/mario.nes");
                 /*
                  * Buttons
                  */
+                 /*
                 self.buttons.pause.click(function() {
                     if (self.nes.isRunning) {
                         self.nes.stop();
@@ -125,11 +127,12 @@ if (typeof jQuery !== 'undefined') {
                         self.nes.opts.emulateSound = true;
                         self.buttons.sound.attr("value", "disable sound");
                     }
-                });
+                });*/
                 self.nes.opts.emulateSound = true;
 
-
+  /*
                 self.zoomed = false;
+
                 self.buttons.zoom.click(function() {
                     if (self.zoomed) {
                         self.screen.animate({
@@ -147,13 +150,13 @@ if (typeof jQuery !== 'undefined') {
                         self.buttons.zoom.attr("value", "zoom out");
                         self.zoomed = true;
                     }
-                });
+                });*/
 
                 self.screen.animate({
                     width: '580px',
                     height: '480px'
                 });
-                self.buttons.zoom.attr("value", "zoom out");
+                //self.buttons.zoom.attr("value", "zoom out");
                 //self.zoomed = true;
 
                 /*
@@ -237,7 +240,7 @@ if (typeof jQuery !== 'undefined') {
                 rom is loaded (self.romSelect.val()) **/
                 loadROM: function(rom) {
                     var self = this;
-                    self.updateStatus("Downloading...");
+                    //self.updateStatus("Downloading...");
                     if (!rom) rom = self.romSelect.val();
                     $.ajax({
                         url: escape(rom),
@@ -297,7 +300,7 @@ if (typeof jQuery !== 'undefined') {
                  * Enable and reset UI elements
                  */
                 enable: function() {
-                    this.buttons.pause.attr("disabled", null);
+                  /*  this.buttons.pause.attr("disabled", null);
                     if (this.nes.isRunning) {
                         this.buttons.pause.attr("value", "pause");
                     }
@@ -310,15 +313,16 @@ if (typeof jQuery !== 'undefined') {
                     }
                     else {
                         this.buttons.sound.attr("value", "enable sound");
-                    }
+                    }*/
                 },
 
                 updateStatus: function(s) {
-                    this.status.text(s);
+                  //  this.status.text(s);
+                  //console.log("Update status " +s);
                 },
 
                 setRoms: function(roms) {
-                    console.log("Loading roms ", roms);
+                  /*  console.log("Loading roms ", roms);
                     this.romSelect.children().remove();
                     $("<option>Select a ROM...</option>").appendTo(this.romSelect);
                     for (var groupName in roms) {
@@ -332,7 +336,7 @@ if (typeof jQuery !== 'undefined') {
                             }
                             this.romSelect.append(optgroup);
                         }
-                    }
+                    }*/
                 },
 
                 writeAudio: function(samples) {
