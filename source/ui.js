@@ -50,13 +50,13 @@ if (typeof jQuery !== 'undefined') {
                   });
 
                   //dissappear and remove div popup
-                /*  setTimeout(function(){
+                  setTimeout(function(){
                     $div.animate({
                           right: -200
                     }, function() {
                       $div.remove(); // on animation finish, remove
                     });
-                  }, 3000); *///Hide after 3 seconds
+                  }, 3000); //Hide after 3 seconds
                 };
                 /*
                  * Create UI
@@ -72,6 +72,50 @@ if (typeof jQuery !== 'undefined') {
                 self.nes.audio = {
                    ctx: new AudioContext()
                  };
+
+                 function clone(src) {
+                 	 return jQuery.extend(true, {}, src);
+                 }
+
+                 var rompath = "mario";
+                 $("<button>Save</button>").click(function(){
+                  //var rompath = escape(self.currentRom);
+                   console.log("saving " + rompath);
+
+                   var currData = self.nes.toJSON();
+                   var saveData = JSON.stringify(currData);
+                   localStorage.setItem(rompath, saveData);
+
+                 }).appendTo(self.root);
+
+                 $("<button>Load</button>").click(function(){
+
+                      console.log("loading " + rompath);
+
+                      var saveData = localStorage.getItem(rompath);
+                      if( saveData == null ) {
+                          console.log("nothing to load");
+                          alert("You must save before loading.");
+                          return;
+                      }
+
+                      var decodedData = JSON.parse(saveData);
+                      console.log(decodedData);
+                      self.nes.fromJSON(decodedData);
+                      self.nes.start();
+
+                 }).appendTo(self.root);
+
+
+                 $("<button>Invincible</button>").click(function(){
+                     self.nes.cpu.mem[0x079f] = 50;
+                 }).appendTo(self.root);
+                 $("<button>Swim</button>").click(function(){
+                     self.nes.cpu.mem[0x0704] = 1;
+                 }).appendTo(self.root);
+
+                 self.romContainer = $('<div class="nes-roms"></div>').appendTo(self.root);
+
 /*
                 self.romContainer = $('<div class="nes-roms"></div>').appendTo(self.root);
                 self.romSelect = $('<select></select>').appendTo(self.romContainer);
@@ -270,6 +314,7 @@ if (typeof jQuery !== 'undefined') {
                             self.nes.loadRom(data);
                             self.nes.start();
                             self.enable();
+                            self.nes.achievements.start();
                         }
                     });
                 },
