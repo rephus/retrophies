@@ -1,0 +1,37 @@
+.achievement {
+  width: 200px;
+  height:60px;
+  background-color:gray;
+  border:1px solid black;
+  border-radius: 10px;
+
+  position:fixed;
+  right:-200px;
+  top:30px;
+}
+.achievement img {
+  height: 40px;
+padding: 10px;
+}
+.achievement .details {
+  width: 75%;
+  line-height: 3px;
+  text-align: right;
+
+  position: absolute;
+  top: 0px;
+  right: 5px;
+}
+.achievement .title {
+  color:white
+}
+.achievement .description {
+  color:#ddd;
+      font-size: small;
+      line-height:10px;
+}
+
+/* Override bootstrap p margin*/
+.achievement  p{
+  margin: 10px 0px 10px 10px
+}

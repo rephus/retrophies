@@ -32,8 +32,41 @@ if (typeof jQuery !== 'undefined') {
                 var self = this;
                 self.nes = nes;
 
+                var enableAchievementsUI = function(){
+
+                  $(".achievement-hide").animate({ right: 0  });
+
+                };
+
+                //LOad achievements list
+                var updateAchievementList = function(){
+
+                  $achievementList = $("#achievements-list");
+                  $achievementList.empty(); //reset list
+                  for (var i in achievements) {
+                    var achievement = achievements[i];
+                    var secret = "";
+                    var title = achievement[2];
+                    var description =  achievement[3];
+                    if (achievements[i][5] !== true) {
+                      secret = "secret";
+                      title = title.replace(/./g,'?');
+                      description = description.replace(/./g,'?');
+                    }
+                    $achievementList.append('<li class="achievement-item ">'+
+                                    "<img class='"+secret+"'src=achievements/"+achievement[4]+".png>"+
+                                    "<span class='title'>" + title+ "</span>"+
+                                    "<span class='description'>"+ description +"</span>"+
+                    '</li>');
+                  }
+                };
+
+                updateAchievementList();
+
                 // [Memory (0), Value (1) , Title (2), Description (3), Img (4), Triggered (5)]
                 self.achievementPopup = function(achievement){
+                  updateAchievementList();
+                  enableAchievementsUI();
                   console.log("Popping achievement ");
                   var $div = $("<div class='achievement'>" +
                                   "<img src=achievements/"+achievement[4]+".png>"+
@@ -42,7 +75,7 @@ if (typeof jQuery !== 'undefined') {
                                     "<p class='description'>"+ achievement[3] +"</p>"+
                                   "</div>"+
                                "</div>");
-                  $div.appendTo(self.root);
+                  $div.appendTo($("body"));
 
                   //appear div popup
                   $div.animate({
@@ -52,17 +85,17 @@ if (typeof jQuery !== 'undefined') {
                   //dissappear and remove div popup
                   setTimeout(function(){
                     $div.animate({
-                          right: -200
+                        //  right: -200
                     }, function() {
-                      $div.remove(); // on animation finish, remove
+                    //  $div.remove(); // on animation finish, remove
                     });
                   }, 3000); //Hide after 3 seconds
                 };
                 /*
                  * Create UI
                  */
-                self.root = $('<div class="tv"></div>');
-                self.screen = $('<canvas class="nes-screen" width="256" height="240"></canvas>').appendTo(self.root);
+                self.root = $('<div class="root"></div>');
+                self.screen = $('<canvas class="nes-screen" width="256" height="240"></canvas>').appendTo($("#emulator"));
 
                 if (!self.screen[0].getContext) {
                     parent.html("Your browser doesn't support the <code>&lt;canvas&gt;</code> tag. Try Google Chrome, Safari, Opera or Firefox!");
@@ -77,8 +110,20 @@ if (typeof jQuery !== 'undefined') {
                  	 return jQuery.extend(true, {}, src);
                  }
 
+                $(".tweet-button").click(function(){
+                   var achieved = 0;
+                   for (var i in achievements) if (achievements[i][5] === true) achieved++; //triggered
+
+                     var plainUrl= "http://retrophies.com";
+                     var url = encodeURIComponent(plainUrl);
+                     var tag = "retrophies";
+                     var tweetBody = "Got "+achieved+ " of " + achievements.length + " trophies in Super Mario Bros for #Nintendo on #Retrophies "+plainUrl;
+                     tweetBody = encodeURIComponent(tweetBody);
+                     var twitterUrl="https://twitter.com/intent/tweet?original_referer="+url+"&amp;ref_src="+tag+"&amp;related="+tag+"&amp;text="+tweetBody+"&amp;tw_p=tweetbutton"//&amp;url="+url+"&amp;"//hashtags="+tag+"&amp;via="+tag;
+                     window.open(twitterUrl);
+                  });
                  var rompath = "mario";
-                 $("<button>Save</button>").click(function(){
+                 $("#save-button").click(function(){
                   //var rompath = escape(self.currentRom);
                    console.log("saving " + rompath);
 
@@ -88,12 +133,12 @@ if (typeof jQuery !== 'undefined') {
 
                  }).appendTo(self.root);
 
-                 $("<button>Load</button>").click(function(){
+                 $("#load-button").click(function(){
 
                       console.log("loading " + rompath);
 
                       var saveData = localStorage.getItem(rompath);
-                      if( saveData == null ) {
+                      if( saveData === null ) {
                           console.log("nothing to load");
                           alert("You must save before loading.");
                           return;
@@ -104,109 +149,36 @@ if (typeof jQuery !== 'undefined') {
                       self.nes.fromJSON(decodedData);
                       self.nes.start();
 
-                 }).appendTo(self.root);
+                 });
 
 
-                 $("<button>Invincible</button>").click(function(){
+                 $("#invincible-button").click(function(){
                      self.nes.cpu.mem[0x079f] = 50;
-                 }).appendTo(self.root);
-                 $("<button>Swim</button>").click(function(){
+                 });
+                 $("#swim-button").click(function(){
                      self.nes.cpu.mem[0x0704] = 1;
-                 }).appendTo(self.root);
+                 });
 
-                 self.romContainer = $('<div class="nes-roms"></div>').appendTo(self.root);
-
+                 /** DEBUG BUTTONS, remove before release */
 /*
-                self.romContainer = $('<div class="nes-roms"></div>').appendTo(self.root);
-                self.romSelect = $('<select></select>').appendTo(self.romContainer);
-
-                self.controls = $('<div class="nes-controls"></div>').appendTo(self.root);
-                self.buttons = {
-                    pause: $('<input type="button" value="pause" class="nes-pause" disabled="disabled">').appendTo(self.controls),
-                    restart: $('<input type="button" value="restart" class="nes-restart" disabled="disabled">').appendTo(self.controls),
-                    sound: $('<input type="button" value="enable sound" class="nes-enablesound">').appendTo(self.controls),
-                    zoom: $('<input type="button" value="zoom in" class="nes-zoom">').appendTo(self.controls)
-                };
-                self.status = $('<p class="nes-status">Booting up...</p>').appendTo(self.root);
+                 $("<button>trigger-achivement</button>").click(function(){
+                       var achievement= [0,0 , 'Achievement title', 'Description', 'star', true];
+                       self.achievementPopup(achievement);
+                 }).appendTo(self.root);
 */
-              self.root.appendTo(parent);
+                 /* END DEBUG BUTTONS */
 
-                /*
-                 * ROM loading
+                self.root.appendTo(parent);
 
-                self.romSelect.change(function() {
-                    console.log("Loading rom " , self.romSelect);
-                    self.loadROM();
-                });
- */
-                // Load mario game automatically on start
                 self.loadROM("roms/mario.nes");
-                /*
-                 * Buttons
-                 */
-                 /*
-                self.buttons.pause.click(function() {
-                    if (self.nes.isRunning) {
-                        self.nes.stop();
-                        self.updateStatus("Paused");
-                        self.buttons.pause.attr("value", "resume");
-                    }
-                    else {
-                        self.nes.start();
-                        self.buttons.pause.attr("value", "pause");
-                    }
-                });
 
-                self.buttons.restart.click(function() {
-                    self.nes.reloadRom();
-                    self.nes.start();
-                });
-
-                self.buttons.sound.click(function() {
-                    if (self.nes.opts.emulateSound) {
-                        self.nes.opts.emulateSound = false;
-                        self.buttons.sound.attr("value", "enable sound");
-                    }
-                    else {
-                        self.nes.opts.emulateSound = true;
-                        self.buttons.sound.attr("value", "disable sound");
-                    }
-                });*/
                 self.nes.opts.emulateSound = true;
-
-  /*
-                self.zoomed = false;
-
-                self.buttons.zoom.click(function() {
-                    if (self.zoomed) {
-                        self.screen.animate({
-                            width: '256px',
-                            height: '240px'
-                        });
-                        self.buttons.zoom.attr("value", "zoom in");
-                        self.zoomed = false;
-                    }
-                    else {
-                        self.screen.animate({
-                            width: '512px',
-                            height: '480px'
-                        });
-                        self.buttons.zoom.attr("value", "zoom out");
-                        self.zoomed = true;
-                    }
-                });*/
 
                 self.screen.animate({
                     width: '580px',
                     height: '480px'
                 });
-                //self.buttons.zoom.attr("value", "zoom out");
-                //self.zoomed = true;
 
-                /*
-                 * Lightgun experiments with mouse
-                 * (Requires jquery.dimensions.js)
-                 */
                 if ($.offset) {
                     self.screen.mousedown(function(e) {
                         if (self.nes.mmap) {
@@ -345,64 +317,16 @@ if (typeof jQuery !== 'undefined') {
                  * Enable and reset UI elements
                  */
                 enable: function() {
-                  /*  this.buttons.pause.attr("disabled", null);
-                    if (this.nes.isRunning) {
-                        this.buttons.pause.attr("value", "pause");
-                    }
-                    else {
-                        this.buttons.pause.attr("value", "resume");
-                    }
-                    this.buttons.restart.attr("disabled", null);
-                    if (this.nes.opts.emulateSound) {
-                        this.buttons.sound.attr("value", "disable sound");
-                    }
-                    else {
-                        this.buttons.sound.attr("value", "enable sound");
-                    }*/
                 },
 
                 updateStatus: function(s) {
-                  //  this.status.text(s);
-                  //console.log("Update status " +s);
                 },
 
                 setRoms: function(roms) {
-                  /*  console.log("Loading roms ", roms);
-                    this.romSelect.children().remove();
-                    $("<option>Select a ROM...</option>").appendTo(this.romSelect);
-                    for (var groupName in roms) {
-                        if (roms.hasOwnProperty(groupName)) {
-                            var optgroup = $('<optgroup></optgroup>').
-                                attr("label", groupName);
-                            for (var i = 0; i < roms[groupName].length; i++) {
-                                $('<option>'+roms[groupName][i][0]+'</option>')
-                                    .attr("value", roms[groupName][i][1])
-                                    .appendTo(optgroup);
-                            }
-                            this.romSelect.append(optgroup);
-                        }
-                    }*/
+
                 },
 
                 writeAudio: function(samples) {
-                    //return this.dynamicaudio.writeInt(samples);
-
-                    //https://github.com/davidmarkclements/jsnes/commit/8a4a2244255114aa03d5da2ac0e54ddfb7aa1824#diff-478c5384d0b4a5ca4c1a8e27f9a68c08
-                    /* WARNING PUT SOUND TO A MINIMUM */
-                    //Synced audio but bad quality
-                  /*   var ctx = this.nes.audio.ctx;
-
-                    var buffer = ctx.createBuffer(2, samples.length * 2, ctx.sampleRate);
-                    var source = ctx.createBufferSource();
-                    source.buffer = buffer;
-                    var l = buffer.getChannelData(0);
-                    var r = buffer.getChannelData(1);
-                    var sample = new Float32Array(new Uint16Array(samples).buffer);
-
-                    l.set(sample);
-                     r.set(sample);
-                     source.connect(ctx.destination);
-                     source.start();*/
 
                      if (this.dynamicaudio) {
                         return this.dynamicaudio.writeInt(samples);

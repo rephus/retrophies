@@ -4,63 +4,172 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>JSNES: A JavaScript NES emulator</title>
 
+		<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
 
+		<script src="js/jquery.min.js"></script>
+		<script src="js/jquery.waypoints.min.js"></script>
 
-    <LINK REL=StyleSheet HREF="css/style.css" TYPE="text/css" MEDIA=screen>
+  <!---- start-smoth-scrolling---->
+  		<script type="text/javascript" src="js/move-top.js"></script>
+  		<script type="text/javascript" src="js/easing.js"></script>
+  		<script type="text/javascript">
+  			jQuery(document).ready(function($) {
+  				$(".scroll").click(function(event){
+  					event.preventDefault();
+  					$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+  				});
+  			});
+  		</script>
+      <!-- end smoth-scrolling -->
+
+      <!-- Custom Theme files -->
+ 		<link href="css/theme-style.css" rel='stylesheet' type='text/css' />
+    		 <!-- Custom Theme files -->
+
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+ </script>
+      <!----webfonts---->
+    <link href='//fonts.googleapis.com/css?family=Ubuntu:300,400,500,700,400italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:400,600,800,300,700' rel='stylesheet' type='text/css'>
+    <!----//webfonts---->
+
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/achievements.css">
+
 </head>
 
 <body>
-    <div id="emulator"></div>
 
-    <h2>Controls</h2>
-    <table id="controls">
-        <tr>
-            <th>Button</th>
-            <th>Player 1</th>
-            <th>Player 2</th>
-        </tr>
-        <tr>
-            <td>Left</td>
-            <td>Left</td>
-            <td>Num-4</td>
-        <tr>
-            <td>Right</td>
-            <td>Right</td>
-            <td>Num-6</td>
-        </tr>
-        <tr>
-            <td>Up</td>
-            <td>Up</td>
-            <td>Num-8</td>
-        </tr>
-        <tr>
-            <td>Down</td>
-            <td>Down</td>
-            <td>Num-2</td>
-        </tr>
-        <tr>
-            <td>A</td>
-            <td>X</td>
-            <td>Num-7</td>
-        </tr>
-        <tr>
-            <td>B</td>
-            <td>Z/Y</td>
-            <td>Num-9</td>
-        </tr>
-        <tr>
-            <td>Start</td>
-            <td>Enter</td>
-            <td>Num-1</td>
-        </tr>
-        <tr>
-            <td>Select</td>
-            <td>Ctrl</td>
-            <td>Num-3</td>
-        </tr>
-    </table>
 
-<a href="https://twitter.com/intent/tweet?hashtags=demo&amp;original_referer=https%3A%2F%2Fdev.twitter.com%2Fweb%2Ftweet-button&amp;ref_src=twsrc%5Etfw&amp;related=twitterapi%2Ctwitter&amp;text=Hello%20world&amp;tw_p=tweetbutton&amp;url=https%3A%2F%2Fexample.com%2Ffoo&amp;via=twitterdev" class="btn" id="b"><i></i><span class="label" id="l">Tweet</span></a>
+  <div id="emulator-panel">
+    <div class='background'>
+      <div class="container">
+        <div class="head">
+            <h3>Retrophies <span> </span></h3>
+        </div>
+        <img class='control-p1' src='images/control-p1.png'/>
+
+          <img class='tweet-button achievement-hide' style='top:150px' src='images/tweet-button.png'/>
+          <a href="#achievements-panel" style='top:200px' class=" achievement-hide scroll page-scroll">
+            <img class='list-achievements-button' src='images/achievements-button.png'/>
+          </a>
+        <div class="consulation-grids">
+          <div class="col-md-12 consulation-left text-center">
+            <div id="emulator"></div>
+          </div>
+        <!--  <div class="col-md-12 consulation-left text-center">
+            <button id='save-button'>Save</button>
+            <button id='load-button'>Load</button>
+            <button id='invincible-button'>Invincible</button>
+            <button id='swim-button'>Swim</button>
+          </div>-->
+        </div>
+
+        <div class="clearfix"> </div>
+      </div>
+    </div>
+  </div>
+
+  <a class='fork-github' target='_blank' href="https://github.com/rephus/retrophies">
+  <img src='images/fork-github-left.png'/>
+  </a>
+
+
+<div id="description-panel">
+			<div class="container padding-20">
+
+					<div class="col-md-6 padding-20">
+            <h2> What is retrophies ? </h2>
+              Retrophies is an open source working prototype of a Nintendo emulator,
+              running Super Mario Bros, but with trophies/achievements implemented on top of the
+              unhacked ROM.
+					</div>
+
+          <div class="col-md-6">
+              <img class='img-responsive' src='images/achievement.png'/>
+					</div>
+
+          <div class="col-md-12 padding-20">
+              <h2> Can Retrophies be extended to other games or emulators ? </h2>
+              Yes, this page is only a prove of concept about achievements on classic games.
+              This emulator (based on
+              <a  target='_blank' href='https://github.com/bfirsh/jsnes/'>JSNES</a>
+              ) already supports different ROMs from Nintendo; other emulators might support
+              this feature as long as they have access to the real-time memory or if they
+              support Game Genie codes already.
+
+              Retrophies is also scalable to support multiple games and different trophies per game, although
+              it's a pretty complex manual process so it might take some time to do.
+          </div>
+
+          <div class="col-md-6 ">
+              <img class='img-responsive' src='images/memory.png'/>
+          </div>
+
+          <div class="col-md-6 padding-20">
+              <h2> How does Retrophies work ? </h2>
+              Achievements are <i>achieved</i> by looking at specific parts of the game's memory
+              in real time. In a similar way of how cheat cartridges work, like Game Genie.
+              An effective but complex process, as all the achievements have been
+              reverse engineered by looking at the memory, one by one.
+          </div>
+
+
+
+				<div class="clearfix"> </div>
+			</div>
+</div>
+
+
+<div id="achievements-panel">
+			<div class="container ">
+        <div class="head">
+            <h3>List of trophies</h3>
+        </div>
+
+					<ul id='achievements-list'>
+          </ul>
+          <div class="col-md-12 padding-20 text-center">
+            <img class='tweet-button ' src='images/tweet-button.png'/>
+
+          </div>
+
+
+			</div>
+</div>
+
+<div id="coconauts-panel">
+			<div class="container text-center ">
+
+					<div class="col-md-12 padding-20">
+           Developed by
+           <a href='http://twitter.com/rephus'>Javier Rengel</a>
+           at
+           <a href='http://coconauts.net'>Coconauts</a>
+					</div>
+
+          <div class="col-md-12">
+
+          </div>
+
+          <div class="col-md-12">
+           Download Retrophies project on
+           <a target='_blank' href="https://github.com/rephus/retrophies">
+             Github
+           </a>.
+           Retrophies is a fork of
+           <a  target='_blank' href='https://github.com/bfirsh/jsnes/'>JSNES</a>
+
+            <div class="col-md-12">
+             Do you want to know more ? Check more details about this project
+              <a target='_blank' href="http://coconauts.net/projects/retrophies">
+               at our blog
+              </a>
+				<div class="clearfix"> </div>
+			</div>
+</div>
+
 
     <script src="lib/jquery-1.4.2.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="lib/dynamicaudio-min.js" type="text/javascript" charset="utf-8"></script>

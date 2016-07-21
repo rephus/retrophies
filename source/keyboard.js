@@ -19,7 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // Keyboard events are bound in the UI
 JSNES.Keyboard = function() {
     var i;
-    
+
     this.keys = {
         KEY_A: 0,
         KEY_B: 1,
@@ -44,16 +44,33 @@ JSNES.Keyboard = function() {
 JSNES.Keyboard.prototype = {
     setKey: function(key, value) {
         switch (key) {
-            case 88: this.state1[this.keys.KEY_A] = value; break;      // X
-            case 89: this.state1[this.keys.KEY_B] = value; break;      // Y (Central European keyboard)
-            case 90: this.state1[this.keys.KEY_B] = value; break;      // Z
-            case 17: this.state1[this.keys.KEY_SELECT] = value; break; // Right Ctrl
-            case 13: this.state1[this.keys.KEY_START] = value; break;  // Enter
-            case 38: this.state1[this.keys.KEY_UP] = value; break;     // Up
-            case 40: this.state1[this.keys.KEY_DOWN] = value; break;   // Down
-            case 37: this.state1[this.keys.KEY_LEFT] = value; break;   // Left
-            case 39: this.state1[this.keys.KEY_RIGHT] = value; break;  // Right
+            //Player 2 uses the same controls as P1
 
+            case 88: this.state1[this.keys.KEY_A] = value;
+                     this.state2[this.keys.KEY_A] = value;
+                     break;      // X
+            case 89: this.state1[this.keys.KEY_B] = value;
+                    this.state2[this.keys.KEY_B] = value;
+                      break;      // Y (Central European keyboard)
+            case 90: this.state1[this.keys.KEY_B] = value;
+                    this.state2[this.keys.KEY_B] = value;
+                    break;      // Z
+            case 17: this.state1[this.keys.KEY_SELECT] = value;
+                    this.state2[this.keys.KEY_SELECT] = value;
+                     break; // Right Ctrl
+            case 13: this.state1[this.keys.KEY_START] = value; break;  // Enter
+            case 38: this.state1[this.keys.KEY_UP] = value;
+                     this.state2[this.keys.KEY_UP] = value;
+                      break;     // Up
+            case 40: this.state1[this.keys.KEY_DOWN] = value;
+                     this.state1[this.keys.KEY_DOWN] = value;
+                     break;   // Down
+            case 37: this.state1[this.keys.KEY_LEFT] = value;
+                    this.state2[this.keys.KEY_LEFT] = value;
+                    break;   // Left
+            case 39: this.state1[this.keys.KEY_RIGHT] = value;
+                    this.state2[this.keys.KEY_RIGHT] = value;break;  // Right
+/*
             case 103: this.state2[this.keys.KEY_A] = value; break;     // Num-7
             case 105: this.state2[this.keys.KEY_B] = value; break;     // Num-9
             case 99: this.state2[this.keys.KEY_SELECT] = value; break; // Num-3
@@ -62,6 +79,8 @@ JSNES.Keyboard.prototype = {
             case 98: this.state2[this.keys.KEY_DOWN] = value; break;   // Num-2
             case 100: this.state2[this.keys.KEY_LEFT] = value; break;  // Num-4
             case 102: this.state2[this.keys.KEY_RIGHT] = value; break; // Num-6
+*/
+
             default: return true;
         }
         return false; // preventDefault
@@ -72,13 +91,13 @@ JSNES.Keyboard.prototype = {
             evt.preventDefault();
         }
     },
-    
+
     keyUp: function(evt) {
         if (!this.setKey(evt.keyCode, 0x40) && evt.preventDefault) {
             evt.preventDefault();
         }
     },
-    
+
     keyPress: function(evt) {
         evt.preventDefault();
     }

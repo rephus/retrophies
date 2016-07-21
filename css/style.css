@@ -14,35 +14,82 @@
 
 }
 */
-.achievement {
-  width: 200px;
-  height:60px;
-  background-color:gray;
-  border:1px solid black;
+
+#emulator-panel {
+background-color:#b4d7d5;
+  position:relative;
+}
+#emulator-panel .background {
+
+  background: url(../images/items4_1920x1200.jpg) no-repeat;
+  background-size: 100% auto;
+  background-position: center center;
+
+}
+#coconauts-panel{
+  background-color:#b4d7d5;
+  color:#555;
+}
+#coconauts-panel a{
+  color:white;
+}
+
+.control-p1 {
+  position:absolute;
+  bottom:0px;
+  left:0px;
+  width:25%;
+}
+.padding-20 {
+  padding:20px;
+}
+.margin-20 {
+  margin:20px;
+}
+.achievement-hide {
+  position:absolute;
+  right:-100px;
+}
+
+.tweet-button {
+  width:100px;
+  cursor: pointer;
+}
+.list-achievements-button{
+  width:100px;
+  cursor: pointer;
+}
+
+.achievement-item{
+  list-style-image: none;
+list-style-type: none;
+  border:1px solid grey;
   border-radius: 10px;
+  padding:10px;
+  margin:10px;
 
-  position:fixed;
-  right:-200px;
-  top:30px;
+  box-shadow: 5px 5px 5px #888888;
 }
-.achievement img {
-  height: 40px;
-padding: 10px;
-}
-.achievement .details {
-  width: 75%;
-  line-height: 3px;
-  text-align: right;
 
-  position: absolute;
-  top: 0px;
-  right: 5px;
+.secret {
+  filter: brightness(10%);
+  -webkit-filter: brightness(10%);
+  -moz-filter: brightness(10%);
+  -o-filter: brightness(10%);
+  -ms-filter: brightness(10%);
 }
-.achievement .title {
-  color:white
+
+.achievement-item .title {
+  font-weight: bold;
+  padding: 20px;
+  font-size:large;
 }
-.achievement .description {
-  color:#ddd;
-      font-size: small;
-      line-height:10px;
+.achievement-item img {
+  height:48px;
+}
+
+.fork-github {
+  position:absolute;
+  top:0px;
+  left:0px;
 }
