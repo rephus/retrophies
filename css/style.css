@@ -14,7 +14,15 @@
 
 }
 */
-
+body {
+  overflow-x: hidden;
+}
+.head {
+  padding-top:40px;
+}
+.head img {
+  height:48px;
+}
 #emulator-panel {
 background-color:#b4d7d5;
   position:relative;
@@ -79,6 +87,10 @@ list-style-type: none;
   -ms-filter: brightness(10%);
 }
 
+#achievements-panel {
+  display:none;
+}
+
 .achievement-item .title {
   font-weight: bold;
   padding: 20px;
@@ -92,4 +104,10 @@ list-style-type: none;
   position:absolute;
   top:0px;
   left:0px;
+}
+
+
+.center-image
+{
+padding-top: 40px;
 }

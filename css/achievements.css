@@ -1,9 +1,9 @@
 .achievement {
   width: 200px;
   height:60px;
-  background-color:gray;
-  border:1px solid black;
-  border-radius: 10px;
+  background-color:#121315;
+  border:1px solid #48494b;
+  border-radius: 5px 0px 0px 5px;
 
   position:fixed;
   right:-200px;
@@ -23,12 +23,18 @@ padding: 10px;
   right: 5px;
 }
 .achievement .title {
-  color:white
+  color:#aaa;
 }
 .achievement .description {
-  color:#ddd;
+    color:#555;
       font-size: small;
       line-height:10px;
+      height: 30px;
+      width: 400px;
+      vertical-align: middle;
+      line-height: normal;
+      margin: 0px;
+      display: table-cell;
 }
 
 /* Override bootstrap p margin*/

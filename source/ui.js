@@ -32,6 +32,7 @@ if (typeof jQuery !== 'undefined') {
                 var self = this;
                 self.nes = nes;
 
+
                 var enableAchievementsUI = function(){
 
                   $(".achievement-hide").animate({ right: 0  });
@@ -40,7 +41,7 @@ if (typeof jQuery !== 'undefined') {
 
                 //LOad achievements list
                 var updateAchievementList = function(){
-
+                  $("#achievements-panel").show();
                   $achievementList = $("#achievements-list");
                   $achievementList.empty(); //reset list
                   for (var i in achievements) {
@@ -61,7 +62,7 @@ if (typeof jQuery !== 'undefined') {
                   }
                 };
 
-                updateAchievementList();
+                //updateAchievementList();
 
                 // [Memory (0), Value (1) , Title (2), Description (3), Img (4), Triggered (5)]
                 self.achievementPopup = function(achievement){
@@ -79,15 +80,15 @@ if (typeof jQuery !== 'undefined') {
 
                   //appear div popup
                   $div.animate({
-                        right: 20
+                        right: 0
                   });
 
                   //dissappear and remove div popup
                   setTimeout(function(){
                     $div.animate({
-                        //  right: -200
+                          right: -200
                     }, function() {
-                    //  $div.remove(); // on animation finish, remove
+                      $div.remove(); // on animation finish, remove
                     });
                   }, 3000); //Hide after 3 seconds
                 };
@@ -96,6 +97,27 @@ if (typeof jQuery !== 'undefined') {
                  */
                 self.root = $('<div class="root"></div>');
                 self.screen = $('<canvas class="nes-screen" width="256" height="240"></canvas>').appendTo($("#emulator"));
+
+                setWindowSize = function(){
+                windowHeight = $(window).height();
+                  if (windowHeight > 600) {
+                    self.screen.animate({
+                        width: '580px',
+                        height: '480px'
+                    });
+                    $("#emulator-panel .background").css('height', Math.max(700, windowHeight));
+                  } else {
+                    self.screen.animate({
+                        width: '256px',
+                        height: '240px'
+                    });
+                    $("#emulator-panel .background").css('height', Math.max(500, windowHeight));
+                  }
+                };
+                setWindowSize();
+                $(window).resize(function(){
+                    setWindowSize();
+                });
 
                 if (!self.screen[0].getContext) {
                     parent.html("Your browser doesn't support the <code>&lt;canvas&gt;</code> tag. Try Google Chrome, Safari, Opera or Firefox!");
@@ -160,12 +182,14 @@ if (typeof jQuery !== 'undefined') {
                  });
 
                  /** DEBUG BUTTONS, remove before release */
-/*
+                 function getRandomInt(min, max) {
+                    return Math.floor(Math.random() * (max - min)) + min;
+                  }
                  $("<button>trigger-achivement</button>").click(function(){
                        var achievement= [0,0 , 'Achievement title', 'Description', 'star', true];
                        self.achievementPopup(achievement);
                  }).appendTo(self.root);
-*/
+
                  /* END DEBUG BUTTONS */
 
                 self.root.appendTo(parent);
@@ -174,10 +198,7 @@ if (typeof jQuery !== 'undefined') {
 
                 self.nes.opts.emulateSound = true;
 
-                self.screen.animate({
-                    width: '580px',
-                    height: '480px'
-                });
+
 
                 if ($.offset) {
                     self.screen.mousedown(function(e) {

@@ -21,11 +21,13 @@ JSNES.achievements.prototype = {
     var debug = false;
     for (var i in achievements) {
       var a = achievements[i];
-      var memoryValue = this.nes.cpu.mem[a[0]];
-      if (debug) console.log("Checking achievement "+ a[2]+ ": "+memoryValue);
-      if (memoryValue == a[1] && !a[5]) {
-          achievements[i][5] = true;
-          this.triggerAchievement(a);
+      if (this.nes.cpu.mem[0x0770] > 0){ // 0 is demo mode
+        var memoryValue = this.nes.cpu.mem[a[0]];
+        if (debug) console.log("Checking achievement "+ a[2]+ ": "+memoryValue);
+        if (memoryValue == a[1] && !a[5]) {
+            achievements[i][5] = true;
+            this.triggerAchievement(a);
+        }
       }
     }
   },
@@ -42,12 +44,13 @@ console.log("Loading achievement prototype");
 // Achievements ae a list of values (easier/short to define than a JSON object)
 var achievements = [
   //[Memory (0), Value (1) , Title (2), Description (3), Img (4), Triggered (5)]
+  [0x0770, 1, "Enjoy Retrophies", "Play Super Mario Bros", "mario", false],
   [0x0748, 10, "Gold mine", "Collect 10 coins", "coin", false],
   [0x075A, 7, "More lives than a cat", "Get 8 lives", "1up", false],
   [0x0748, 64, "Buy yourself a life", "Get your first life by coins", "1up", false],
   [0x079f, 23, "Starman", "Collect a star", "star", false],
   [0x0756, 2, "Fire flower power", "Collect a fire flower", "flower", false],
-  [0x0756, 1, "Is this legal?", "Pick a mushroom", "mushroom", false],
+  [0x0756, 1, "Is this legal?", "Pick a mushroom", "mushroom", false], //triggered on demo
   [0x000E, 4, "Level end", "Finish a level", "flower", false],
   [0x07DF, 1, "High score", "Collect more than 10000 points", "coin", false],
   [0x07DE, 1, "Huge score", "Collect more than 100000 points", "coin", false],
