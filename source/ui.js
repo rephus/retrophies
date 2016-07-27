@@ -136,7 +136,7 @@ if (typeof jQuery !== 'undefined') {
                    var achieved = 0;
                    for (var i in achievements) if (achievements[i][5] === true) achieved++; //triggered
 
-                     var plainUrl= "http://retrophies.com";
+                     var plainUrl= "http://retrophies.win";
                      var url = encodeURIComponent(plainUrl);
                      var tag = "retrophies";
                      var tweetBody = "Got "+achieved+ " of " + achievements.length + " trophies in Super Mario Bros for #Nintendo on #Retrophies "+plainUrl;

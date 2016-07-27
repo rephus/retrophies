@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Retrophies: Super Mario Bros.</title>
+    <title>Retrophies - Super Mario Bros. NES</title>
     <link rel="favicon" type="image/png" href="favicon.png"/>
 
 		<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
@@ -27,16 +27,45 @@
  		<link href="css/theme-style.css" rel='stylesheet' type='text/css' />
     		 <!-- Custom Theme files -->
 
- <meta name="viewport" content="width=device-width, initial-scale=1">
- <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
- </script>
-      <!----webfonts---->
-    <link href='//fonts.googleapis.com/css?family=Ubuntu:300,400,500,700,400italic' rel='stylesheet' type='text/css'>
-    <link href='//fonts.googleapis.com/css?family=Open+Sans:400,600,800,300,700' rel='stylesheet' type='text/css'>
-    <!----//webfonts---->
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+   </script>
+        <!----webfonts---->
+      <link href='//fonts.googleapis.com/css?family=Ubuntu:300,400,500,700,400italic' rel='stylesheet' type='text/css'>
+      <link href='//fonts.googleapis.com/css?family=Open+Sans:400,600,800,300,700' rel='stylesheet' type='text/css'>
+      <!----//webfonts---->
 
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-    <link rel="stylesheet" type="text/css" href="css/achievements.css">
+      <link rel="stylesheet" type="text/css" href="css/style.css">
+      <link rel="stylesheet" type="text/css" href="css/achievements.css">
+
+
+      <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-81332397-1', 'auto');
+        ga('send', 'pageview');
+
+      </script>
+      <script type="text/javascript">
+        (function(e,t){var n=e.amplitude||{_q:[],_iq:{}};var r=t.createElement("script");r.type="text/javascript";
+        r.async=true;r.src="https://d24n15hnbwhuhn.cloudfront.net/libs/amplitude-3.0.2-min.gz.js";
+        r.onload=function(){e.amplitude.runQueuedFunctions()};var i=t.getElementsByTagName("script")[0];
+        i.parentNode.insertBefore(r,i);function s(e,t){e.prototype[t]=function(){this._q.push([t].concat(Array.prototype.slice.call(arguments,0)));
+        return this}}var o=function(){this._q=[];return this};var a=["add","append","clearAll","prepend","set","setOnce","unset"];
+        for(var u=0;u<a.length;u++){s(o,a[u])}n.Identify=o;var c=function(){this._q=[];return this;
+        };var p=["setProductId","setQuantity","setPrice","setRevenueType","setEventProperties"];
+        for(var l=0;l<p.length;l++){s(c,p[l])}n.Revenue=c;var d=["init","logEvent","logRevenue","setUserId","setUserProperties","setOptOut","setVersionName","setDomain","setDeviceId","setGlobalUserProperties","identify","clearUserProperties","setGroup","logRevenueV2","regenerateDeviceId"];
+        function v(e){function t(t){e[t]=function(){e._q.push([t].concat(Array.prototype.slice.call(arguments,0)));
+        }}for(var n=0;n<d.length;n++){t(d[n])}}v(n);n.getInstance=function(e){e=(!e||e.length===0?"$default_instance":e).toLowerCase();
+        if(!n._iq.hasOwnProperty(e)){n._iq[e]={_q:[]};v(n._iq[e])}return n._iq[e]};e.amplitude=n;
+        })(window,document);
+
+        amplitude.getInstance().init("96c3d35c88e0f21deff5b5623e74b8ed");
+      </script>
+
 
 </head>
 
@@ -81,9 +110,9 @@
 			<div class="container padding-20 ">
 					<div class="col-md-6 padding-20">
             <h2> What is retrophies ? </h2>
-              Retrophies is an open source working prototype of a Nintendo emulator,
-              running Super Mario Bros, but with trophies/achievements implemented on top of the
-              unhacked ROM.
+            Retrophies is an attempt to bring trophies/achievements to classic console games, running on an emulator.
+
+            The first prototype implements some achievements on top of the unhacked rom of Super Mario Bros for NES.
 					</div>
 
           <div class="col-md-6 center-image">
@@ -91,15 +120,13 @@
 					</div>
           <div class="col-md-12 padding-20">
               <h2> Can Retrophies be extended to other games or emulators ? </h2>
-              Yes, this page is only a prove of concept about achievements on classic games.
-              This emulator (based on
-              <a  target='_blank' href='https://github.com/bfirsh/jsnes/'>JSNES</a>
-              ) already supports different ROMs from Nintendo; other emulators might support
-              this feature as long as they have access to the real-time memory or if they
-              support Game Genie codes already.
-
-              Retrophies is also scalable to support multiple games and different trophies per game, although
-              it's a pretty complex manual process so it might take some time to do.
+            Yes, this page is only a proof of concept,
+            but the principles should be applicable to ther roms and emulators.
+            Retrophies just needs the emulator to be able to inspect the game memory in real time
+            (emulators that support Game Genie codes should be capable of this).
+            Retrophies is also scalable to support multiple games and different trophies per game,
+            although creating achievements themselves it's a pretty complex manual process
+            so it might take some time to do.
           </div>
 
           <div class="col-md-6 center-image">
@@ -108,10 +135,13 @@
 
           <div class="col-md-6 padding-20">
               <h2> How does Retrophies work ? </h2>
-              Achievements are <i>achieved</i> by looking at specific parts of the game's memory
-              in real time. In a similar way of how cheat cartridges work, like Game Genie.
-              An effective but complex process, as all the achievements have been
-              reverse engineered by looking at the memory, one by one.
+              Achievements are triggered by looking at specific parts of the game's memory in real time,
+              until they match certain conditions.
+              If you are familiar with cheat cartidges, like Game Genie,
+              there's a lot of overlap in how both work. In the same way as cheat codes,
+              In a similar way of how cheat cartridges work, like Game Genie.
+              An effective but complex process, as all the achievements have been reverse engineered
+              by looking at the memory, one by one.
           </div>
 
 				<div class="clearfix"> </div>
