@@ -225,7 +225,8 @@ JSNES.prototype = {
             'romData': this.romData,
             'cpu': this.cpu.toJSON(),
             'mmap': this.mmap.toJSON(),
-            'ppu': this.ppu.toJSON()
+            'ppu': this.ppu.toJSON(),
+            'achievements': this.achievements.toJSON()
         };
     },
 
@@ -234,5 +235,6 @@ JSNES.prototype = {
         this.cpu.fromJSON(s.cpu);
         this.mmap.fromJSON(s.mmap);
         this.ppu.fromJSON(s.ppu);
+        this.achievements.fromJSON(s.achievements);
     }
 };

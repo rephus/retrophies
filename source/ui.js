@@ -41,6 +41,8 @@ if (typeof jQuery !== 'undefined') {
 
                 //LOad achievements list
                 var updateAchievementList = function(){
+                  var achievements = self.nes.achievements.list;
+
                   $("#achievements-panel").show();
                   $achievementList = $("#achievements-list");
                   $achievementList.empty(); //reset list
@@ -133,6 +135,8 @@ if (typeof jQuery !== 'undefined') {
                  }
 
                 $(".tweet-button").click(function(){
+                  var achievements = self.nes.achievements.list;
+
                    var achieved = 0;
                    for (var i in achievements) if (achievements[i][5] === true) achieved++; //triggered
 
@@ -141,35 +145,51 @@ if (typeof jQuery !== 'undefined') {
                      var tag = "retrophies";
                      var tweetBody = "Got "+achieved+ " of " + achievements.length + " trophies in Super Mario Bros for #Nintendo on #Retrophies "+plainUrl;
                      tweetBody = encodeURIComponent(tweetBody);
-                     var twitterUrl="https://twitter.com/intent/tweet?original_referer="+url+"&amp;ref_src="+tag+"&amp;related="+tag+"&amp;text="+tweetBody+"&amp;tw_p=tweetbutton"//&amp;url="+url+"&amp;"//hashtags="+tag+"&amp;via="+tag;
+                     var twitterUrl="https://twitter.com/intent/tweet?original_referer="+url+"&amp;ref_src="+tag+"&amp;related="+tag+"&amp;text="+tweetBody+"&amp;tw_p=tweetbutton";//&amp;url="+url+"&amp;"//hashtags="+tag+"&amp;via="+tag;
                      window.open(twitterUrl);
                   });
+
+                  self.nes.opts.emulateSound = true;
+
+                  $(".mute-button").click(function(){
+
+                    if (self.nes.opts.emulateSound) {
+                      $(this).attr('src', '/images/mute-on.png');
+                    } else {
+                      $(this).attr('src', '/images/mute-off.png');
+                    }
+
+                    self.nes.opts.emulateSound = !self.nes.opts.emulateSound;
+                  });
+
                  var rompath = "mario";
-                 $("#save-button").click(function(){
-                  //var rompath = escape(self.currentRom);
-                   console.log("saving " + rompath);
+                 $(".save-button").click(function(){
 
                    var currData = self.nes.toJSON();
                    var saveData = JSON.stringify(currData);
                    localStorage.setItem(rompath, saveData);
 
-                 }).appendTo(self.root);
+                  $(".load-button").removeClass('disabled');
+                 });
 
-                 $("#load-button").click(function(){
+                 if ( localStorage.getItem(rompath)) {
+                   $(".load-button").removeClass('disabled');
+                 }
 
-                      console.log("loading " + rompath);
+                 $(".load-button").click(function(){
 
                       var saveData = localStorage.getItem(rompath);
                       if( saveData === null ) {
                           console.log("nothing to load");
-                          alert("You must save before loading.");
                           return;
                       }
 
                       var decodedData = JSON.parse(saveData);
-                      console.log(decodedData);
                       self.nes.fromJSON(decodedData);
                       self.nes.start();
+
+                      updateAchievementList();
+                      enableAchievementsUI();
 
                  });
 
@@ -182,23 +202,19 @@ if (typeof jQuery !== 'undefined') {
                  });
 
                  /** DEBUG BUTTONS, remove before release */
-                 function getRandomInt(min, max) {
+                 /*function getRandomInt(min, max) {
                     return Math.floor(Math.random() * (max - min)) + min;
                   }
                  $("<button>trigger-achivement</button>").click(function(){
                        var achievement= [0,0 , 'Achievement title', 'Description', 'star', true];
                        self.achievementPopup(achievement);
-                 }).appendTo(self.root);
+                 }).appendTo(self.root);*/
 
                  /* END DEBUG BUTTONS */
 
                 self.root.appendTo(parent);
 
                 self.loadROM("roms/mario.nes");
-
-                self.nes.opts.emulateSound = true;
-
-
 
                 if ($.offset) {
                     self.screen.mousedown(function(e) {

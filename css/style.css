@@ -17,11 +17,10 @@
 body {
   overflow-x: hidden;
 }
-.head {
-  padding-top:40px;
-}
-.head img {
-  height:48px;
+
+.logo-img {
+  padding-bottom: 20px;
+  width: 50%;
 }
 #emulator-panel {
 background-color:#b4d7d5;
@@ -33,6 +32,9 @@ background-color:#b4d7d5;
   background-size: 100% auto;
   background-position: center center;
 
+}
+#emulator{
+  display:inline-block
 }
 #coconauts-panel{
   background-color:#b4d7d5;
@@ -110,4 +112,19 @@ list-style-type: none;
 .center-image
 {
 padding-top: 40px;
+}
+.extra-controls {
+      display: inline-block;
+}
+.extra-button{
+  width:48px;
+  display:block;
+}
+
+.disabled{
+  -webkit-filter: grayscale(100%);
+   -moz-filter: grayscale(100%);
+     -o-filter: grayscale(100%);
+    -ms-filter: grayscale(100%);
+        filter: grayscale(100%);
 }
