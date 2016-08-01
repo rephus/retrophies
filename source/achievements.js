@@ -84,6 +84,7 @@ JSNES.achievements.prototype = {
   },
 
   triggerAchievement: function(achievement){
+
     console.log("Got achievement "+ achievement[2]);
     nes.ui.achievementPopup(achievement);
   },

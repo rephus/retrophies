@@ -1,6 +1,6 @@
 /*
 Retrophies, based on Ben Firshman' JSNES
-Copyright (C) 2016 Javier Rengel 
+Copyright (C) 2016 Javier Rengel
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -31,7 +31,6 @@ if (typeof jQuery !== 'undefined') {
             var UI = function(nes) {
                 var self = this;
                 self.nes = nes;
-
 
                 var enableAchievementsUI = function(){
 
@@ -68,6 +67,9 @@ if (typeof jQuery !== 'undefined') {
 
                 // [Memory (0), Value (1) , Title (2), Description (3), Img (4), Triggered (5)]
                 self.achievementPopup = function(achievement){
+
+                  amplitude.getInstance().logEvent('achievement '+achievement[2]);
+
                   updateAchievementList();
                   enableAchievementsUI();
                   console.log("Popping achievement ");
@@ -170,6 +172,9 @@ if (typeof jQuery !== 'undefined') {
                    localStorage.setItem(rompath, saveData);
 
                   $(".load-button").removeClass('disabled');
+
+                  amplitude.getInstance().logEvent('save game');
+
                  });
 
                  if ( localStorage.getItem(rompath)) {
@@ -191,14 +196,8 @@ if (typeof jQuery !== 'undefined') {
                       updateAchievementList();
                       enableAchievementsUI();
 
-                 });
+                      amplitude.getInstance().logEvent('load game');
 
-
-                 $("#invincible-button").click(function(){
-                     self.nes.cpu.mem[0x079f] = 50;
-                 });
-                 $("#swim-button").click(function(){
-                     self.nes.cpu.mem[0x0704] = 1;
                  });
 
                 self.root.appendTo(parent);

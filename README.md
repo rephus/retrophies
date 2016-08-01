@@ -4,11 +4,18 @@ A JavaScript NES emulator with Achievements.
 
 Port of [JSNES](https://github.com/bfirsh/jsnes).
 
+Play Retrophies on [Retrophies.win](http//retrophies.win)
+
+More info in [our blog](http://coconauts.net/projects/retrophies)
 ## Build
 
 Just copy all the static files to any webserver
 (like `python -m SimpleHTTPServer` or nginx)
-and start playing.
+
+Create a folder called `roms` and add the `mario.nes` rom (USA)
+
+Enjoy
+
 
 ## Achievement resources
 
