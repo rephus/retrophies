@@ -145,7 +145,7 @@ if (typeof jQuery !== 'undefined') {
                      var plainUrl= "http://retrophies.win";
                      var url = encodeURIComponent(plainUrl);
                      var tag = "retrophies";
-                     var tweetBody = "Got "+achieved+ " of " + achievements.length + " trophies in Super Mario Bros for #Nintendo on #Retrophies "+plainUrl;
+                     var tweetBody = "Got "+achieved+ " of " + achievements.length + " trophies in Super Mario Bros for #Nintendo on #Retrophies "+plainUrl +" via @Coconauts";
                      tweetBody = encodeURIComponent(tweetBody);
                      var twitterUrl="https://twitter.com/intent/tweet?original_referer="+url+"&amp;ref_src="+tag+"&amp;related="+tag+"&amp;text="+tweetBody+"&amp;tw_p=tweetbutton";//&amp;url="+url+"&amp;"//hashtags="+tag+"&amp;via="+tag;
                      window.open(twitterUrl);
