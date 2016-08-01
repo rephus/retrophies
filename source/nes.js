@@ -1,6 +1,6 @@
 /*
-JSNES, based on Jamie Sanders' vNES
-Copyright (C) 2010 Ben Firshman
+Retrophies, based on Ben Firshman' JSNES
+Copyright (C) 2016 Javier Rengel
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

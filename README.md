@@ -1,36 +1,21 @@
-JSNES (with Retrophies for Super Mario Bros)
-============================================
+## Retrophies
+
+A JavaScript NES emulator with Achievements.
 
 Port of [JSNES](https://github.com/bfirsh/jsnes).
 
-A JavaScript NES emulator.
+## Build
 
-Build
------
+Just copy all the static files to any webserver
+(like `python -m SimpleHTTPServer` or nginx)
+and start playing.
 
-To build a distribution, you will [Grunt](http://gruntjs.com):
-
-    $ sudo npm install -g grunt-cli
-
-Then run:
-
-    $ npm install
-    $ grunt
-
-This will create ``jsnes.js`` and ``jsnes-min.js`` in ``build/``.
-
-Benchmark
----------
-
-The benchmark in ``test/benchmark.js`` is intended for testing JavaScript
-engines. It does not depend on a DOM or Canvas element etc.
-
-## Resources
+## Achievement resources
 
 - http://www.mariomayhem.com/fun/smb_level_editor/
 - [Gamehacking memory tips](http://gamehacking.org/game/31010)
 
-## Mario memory positions
+## Super Mario memory positions
 
     075A Life counter  (max 9)
     075E Coin counter (units), if counter reaches 64 (100) it will reset and increment a life
@@ -43,7 +28,6 @@ engines. It does not depend on a DOM or Canvas element etc.
     01f8 Keys (only when game is paused)
     07FA Time (units) (value 0 to 9)
     07F8 Time (centens) (value 0 to 9)
-
     074E Stage type (00 water,01,02 ,03)
     001D Jump indicator (0 if ground, 1 if jump, 2 if falling)
     0016 First enemy on screen (01 red kopa, 06 Goombas. 35 toad, 2D bowser )
@@ -54,21 +38,18 @@ engines. It does not depend on a DOM or Canvas element etc.
     0753 Player controller number (0 player 1, 1 player 2)
     075F World counter (0 for world 1, 1 for world 2)
     0x07C4 Music speed modifier (0 is normal, 8 is fast )
-
     0704 Mario is swimming (0 jumping, 1 swimming in air)
     00b5 Position of mario on start (0 coming from above, 01 on play )
-
-    Flag Always Gives 5000 pts : 010F:00
-    Infinite Time 07FA:09
-    Infinite Time 0787:12
     00f4 Song  (40 for star song) ???
     001d Is grounded ? (0 if grounded, 1 in air)
     075C  Level Text Modifier??
-    -- 00F0 Music speed modifier (18 is normal, 8 is fast )
+    00F0 Music speed modifier (18 is normal, 8 is fast )
 
 ## Debug tips
 
-    Add `C2` to the memory next to `0590` to generate an invisible coin in the screen.
+All these codes below, create invisible items (only on RAM, not PPU) in the screen.
+They need to be applied in the memory address `0x0590` and surroundings.
+
     C2 Coin
     C5 Axe
     C0 Block with coin

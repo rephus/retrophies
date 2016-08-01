@@ -8,7 +8,6 @@
 		<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
 
 		<script src="js/jquery.min.js"></script>
-		<script src="js/jquery.waypoints.min.js"></script>
 
   <!---- start-smoth-scrolling---->
   		<script type="text/javascript" src="js/move-top.js"></script>
@@ -65,12 +64,9 @@
 
         amplitude.getInstance().init("96c3d35c88e0f21deff5b5623e74b8ed");
       </script>
-
-
 </head>
 
 <body>
-
 
   <div id="emulator-panel">
     <div class='background'>
@@ -93,9 +89,9 @@
             <div id="emulator">   </div>
 
             <div class='extra-controls'>
-              <img src='images/mute-off.png' class='mute-button extra-button'/>
-              <img src='images/save.png' class='save-button extra-button'/>
-              <img src='images/load.png' class='load-button extra-button disabled'/>
+              <img src='images/mute-off.png' class='mute-button extra-button' title='Toggle sound'/>
+              <img src='images/save.png' class='save-button extra-button' title='Save game'/>
+              <img src='images/load.png' class='load-button extra-button disabled' title='Load game'/>
             </div>
 
           </div>
@@ -204,8 +200,6 @@
 </div>
 
 
-    <script src="lib/jquery-1.4.2.min.js" type="text/javascript" charset="utf-8"></script>
-    <script src="lib/dynamicaudio-min.js" type="text/javascript" charset="utf-8"></script>
     <script src="source/nes.js" type="text/javascript" charset="utf-8"></script>
     <script src="source/utils.js" type="text/javascript" charset="utf-8"></script>
     <script src="source/cpu.js" type="text/javascript" charset="utf-8"></script>

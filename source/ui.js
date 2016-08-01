@@ -1,6 +1,6 @@
 /*
-JSNES, based on Jamie Sanders' vNES
-Copyright (C) 2010 Ben Firshman
+Retrophies, based on Ben Firshman' JSNES
+Copyright (C) 2016 Javier Rengel 
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -201,17 +201,6 @@ if (typeof jQuery !== 'undefined') {
                      self.nes.cpu.mem[0x0704] = 1;
                  });
 
-                 /** DEBUG BUTTONS, remove before release */
-                 /*function getRandomInt(min, max) {
-                    return Math.floor(Math.random() * (max - min)) + min;
-                  }
-                 $("<button>trigger-achivement</button>").click(function(){
-                       var achievement= [0,0 , 'Achievement title', 'Description', 'star', true];
-                       self.achievementPopup(achievement);
-                 }).appendTo(self.root);*/
-
-                 /* END DEBUG BUTTONS */
-
                 self.root.appendTo(parent);
 
                 self.loadROM("roms/mario.nes");
@@ -269,11 +258,6 @@ if (typeof jQuery !== 'undefined') {
                 /*
                  * Sound
                  */
-                /*Unsynced terrible flash plugin
-
-                self.dynamicaudio = new DynamicAudio({
-                    swf: nes.opts.swfPath+'dynamicaudio.swf'
-                });*/
 
                 //https://github.com/bfirsh/jsnes/pull/45/files
                 window.AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -364,11 +348,6 @@ if (typeof jQuery !== 'undefined') {
                 },
 
                 writeAudio: function(samples) {
-
-                     if (this.dynamicaudio) {
-                        return this.dynamicaudio.writeInt(samples);
-
-                    }
 
                     // Create output buffer (planar buffer format)
                     var buffer = this.audio.createBuffer(2, samples.length, this.audio.sampleRate);
