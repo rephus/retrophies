@@ -50,7 +50,8 @@ JSNES.achievements.prototype = {
     [0x075F, 4, "High five", "Reach world 5", "axe", false],
     [0x075F, 5, "One third remaining", "Reach world 6", "axe", false],
     [0x075F, 6, "Almost there", "Reach world 7", "axe", false],
-    [0x075F, 7, "Last one", "Reach world 8", "axe", false]
+    [0x075F, 7, "Last one", "Reach world 8", "axe", false],
+    [0x075F, 35, "Going down", "Find the minus world", "axe", false]
   ],
   //TODO store and provide list of achievements per game (this is exclusive to Mario)
 
