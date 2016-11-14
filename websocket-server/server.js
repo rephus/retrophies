@@ -81,7 +81,7 @@ var interval = setInterval(function(){
       sendJson(conn, {type: 'update', user: client.user, sector: sector});
     }
   }
-},100);
+},10);
 
 console.log("Websocket server started");
 
@@ -90,6 +90,7 @@ var processJson = function(connection, json) {
   var type = json.type;
   switch(type){
    case 'update':
+    console.log("JSON ",json.user);
       oldLevel = getOrCreateSector(clients[connectionId].user.level);
       newLevel = getOrCreateSector(json.user.level);
 
