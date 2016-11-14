@@ -38,7 +38,8 @@ function drawMultiplayer(ctx) {
 
     drawName(ctx, u.name, positionX, position[1]);
 
-  /*  var cameraX = nes.cpu.mem[0x071A] * 255 + nes.cpu.mem[0x071C];
+  /*  // Draw myself
+  var cameraX = nes.cpu.mem[0x071A] * 255 + nes.cpu.mem[0x071C];
     var positionX = nes.cpu.mem[0x0755];
     var x = cameraX + positionX;
     var y = nes.cpu.mem[0x00CE];
@@ -64,7 +65,6 @@ function connect() {
            var x = cameraX + positionX;
            var y = nes.cpu.mem[0x00CE];
           // ctx.drawImage(img,positionX -16, y -16, 32, 32);
-
 
            user.position = [x,y]; // x, y
            user.level  =  [world, level];
