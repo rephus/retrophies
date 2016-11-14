@@ -1,5 +1,5 @@
 var ws;
-var user = {};
+var user = { name: 'Mario'};
 var sector; // MY own sector (aka level)
 var interval;
 var DEBUG = true;
@@ -7,6 +7,14 @@ var DEBUG = true;
 var img = document.createElement("img");
 img.src = "images/mario-stamp.png";
 
+$('#multiplayer-name').keyup(function(){
+      user.name = $(this).val();
+ });
+function drawName (ctx, name, x, y ) {
+  ctx.font="10px Arial";
+  ctx.fillStyle = 'white';
+  ctx.fillText(name, x, y);
+}
 function drawMultiplayer(ctx) {
 
   if (!sector) return;
@@ -14,25 +22,27 @@ function drawMultiplayer(ctx) {
    var level = nes.cpu.mem[0x0760];
    var world = nes.cpu.mem[0x075F];
 
+   drawName(ctx, user.name, nes.cpu.mem[0x0755], nes.cpu.mem[0x00CE]);
 
   for(var i =0 ; i < sector.users.length; i++){
 
+    var u = sector.users[i];
     //Skip drawing my own user
-    if (sector.users[i].id == user.id) continue;
+    if (u.id == user.id) continue;
 
-    var position = sector.users[i].position;
+    var position = u.position;
 
     var cameraX = nes.cpu.mem[0x071A] * 255 + nes.cpu.mem[0x071C];
     var positionX =  position[0] - cameraX;
     ctx.drawImage(img,positionX, position[1] +16, 18, 18);
+
+    drawName(ctx, u.name, positionX, position[1]);
 
   /*  var cameraX = nes.cpu.mem[0x071A] * 255 + nes.cpu.mem[0x071C];
     var positionX = nes.cpu.mem[0x0755];
     var x = cameraX + positionX;
     var y = nes.cpu.mem[0x00CE];
     ctx.drawImage(img,positionX, y +16, 18, 18);*/
-
-
   }
 
 }
@@ -77,7 +87,7 @@ function connect() {
                  break;
              case 'update':
                  sector = json.sector;
-                 console.log("sector ", sector);
+                //console.log("sector ", sector);
                  break;
              default: log("Message not recognized " + evt.data);
            }
