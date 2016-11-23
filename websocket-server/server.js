@@ -6,6 +6,7 @@ global.redis = require('redis').createClient();
 var SECTOR_SIZE = 100;
 
 var clients = {};
+var scores = { "0,0": [] };
 var sectors = {
   "0,0": { id: "0,0", users:[]}
 };
@@ -108,6 +109,13 @@ var removeUserFromSector = function(userId,sector) {
   }
 };
 
+var addScore= function(level, user, score){
+  var index = level[0] +","+ level[1];
+  if (!scores[index]) scores[index] = [];
+  scores.push({ user: user.name, score: score });
+  // TODO Sort and truncate max scores
+};
+
 var processJson = function(connection, json) {
   var connectionId = connection.key;
   var type = json.type;
@@ -124,6 +132,15 @@ var processJson = function(connection, json) {
 
       // Add user to new sector
       newLevel.users.push(json.user);
+      break;
+
+    case 'score':
+       console.log("Got score ",json);
+       addScore(json.level, json.user, json.score);
+       break;
+   case 'get_score':
+      var score = scores[json.level[0] +","+ json.level[1]];
+      connection.sendText(JSON.stringify(score));
       break;
     default:
         console.error("Json type not recognized: "+type);

@@ -47,10 +47,15 @@ function drawMultiplayer(ctx) {
   }
 
 }
+
+var level ;//= nes.cpu.mem[0x075F]+","+nes.cpu.mem[0x0760];
+var time ;//= nes.cpu.mem[0x07F8] * 100 + nes.cpu.mem[0x07F9] * 10 + nes.cpu.mem[0x07FA];
+var previousLevel ;//=  nes.cpu.mem[0x075F]+","+nes.cpu.mem[0x0760];
+
 function connect() {
    if ("WebSocket" in window) {
       log("Opening websocket!");
-      ws = new WebSocket("ws://localhost:8001/");
+      ws = new WebSocket("ws://retrophies.win:8001/");
 
       ws.onopen = function(){
          log("Connection opened !!");
@@ -75,6 +80,27 @@ function connect() {
            });
          }, 10);
 
+         setInterval(function(){
+           //TODO do once
+             sendJson({ type: 'get_score',
+                        level: [nes.cpu.mem[0x075F], nes.cpu.mem[0x0760]]});
+         }, 1000);
+
+         setInterval(function(){
+           level = nes.cpu.mem[0x075F]+","+nes.cpu.mem[0x0760];
+           if (level != previousLevel && previousLevel && level != "0,0") {
+             //console.log("New level "+previousLevel + " -> "+level+ ": "+time);
+             sendJson({
+               type: 'score',
+               user: user,
+               level: [nes.cpu.mem[0x075F], nes.cpu.mem[0x0760]],
+               time: 400 -time
+             });
+           }
+           time = nes.cpu.mem[0x07F8] * 100 + nes.cpu.mem[0x07F9] * 10 + nes.cpu.mem[0x07FA];
+           previousLevel = level;
+
+         }, 100);
       };
 
       ws.onmessage = function (evt){
